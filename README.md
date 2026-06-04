@@ -28,15 +28,34 @@ VTFCmd and the older VC runtime DLLs needed by VTFCmd/PyOpenGL are included in
 
 ## One-Time Source Setup
 
-Open PowerShell in this repo folder, then create and activate a virtual
-environment:
+Open a terminal in this repo folder. If your prompt looks like `C:\path>`, you
+are using Command Prompt. If it starts with `PS`, you are using PowerShell.
+
+Create the virtual environment first, then activate it as a separate command.
+Do not append the activation script path to `python -m venv`.
+
+Command Prompt:
+
+```cmd
+python -m venv .venv
+.\.venv\Scripts\activate.bat
+```
+
+PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Install runtime/build dependencies:
+If PowerShell blocks activation, run this once in that same PowerShell window:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+```
+
+Install runtime/build dependencies after activation:
 
 ```powershell
 python -m pip install --upgrade pip

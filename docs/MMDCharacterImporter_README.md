@@ -57,18 +57,37 @@ under `%LOCALAPPDATA%\MMDCharacterImporter`.
 
 ### Option B: Run From Source
 
-Open PowerShell in this folder:
+Open a terminal in this folder. If your prompt looks like `C:\path>`, you are
+using Command Prompt. If it starts with `PS`, you are using PowerShell.
 
-```powershell
+```cmd
 cd "C:\path\to\mmd_character_model_importer\MMD Character Importer"
 ```
 
-Create and activate a virtual environment:
+Create the virtual environment first, then activate it as a separate command.
+Do not append the activation script path to `python -m venv`.
+
+Command Prompt:
+
+```cmd
+python -m venv .venv
+.\.venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+```
+
+PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
+```
+
+If PowerShell blocks activation, run this once in that same PowerShell window:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
 ```
 
 Install the Python packages used by the GUI and helper steps:
@@ -128,7 +147,18 @@ The Windows build uses PyInstaller through:
 tools\build_mmd_character_importer_exe.ps1
 ```
 
-Install runtime and build dependencies in the same virtual environment:
+Install runtime and build dependencies in the same virtual environment.
+
+Command Prompt:
+
+```cmd
+python -m venv .venv
+.\.venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install PySide6 numpy Pillow requests PyOpenGL pyinstaller
+```
+
+PowerShell:
 
 ```powershell
 python -m venv .venv
