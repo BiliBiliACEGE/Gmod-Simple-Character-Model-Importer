@@ -90,6 +90,14 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
 
+If your prompt shows both `(.venv)` and `(base)`, deactivate conda before
+building to avoid conda/venv detection warnings:
+
+```powershell
+conda deactivate
+.\.venv\Scripts\Activate.ps1
+```
+
 Install the Python packages used by the GUI and helper steps:
 
 ```powershell
@@ -166,6 +174,9 @@ python -m venv .venv
 python -m pip install --upgrade pip
 python -m pip install PySide6 numpy Pillow requests PyOpenGL pyinstaller
 ```
+
+If your prompt shows both `(.venv)` and `(base)`, run `conda deactivate`, then
+activate `.venv` again before building.
 
 Build the default one-file executable:
 

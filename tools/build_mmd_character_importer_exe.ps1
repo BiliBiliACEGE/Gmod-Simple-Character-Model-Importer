@@ -84,10 +84,22 @@ function Add-BinaryIfExists([string]$Path, [string]$Dest = ".") {
     }
 }
 
+function Invoke-NativeRelaxed([scriptblock]$Command) {
+    $PreviousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        & $Command
+        return $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $PreviousErrorActionPreference
+    }
+}
+
 Push-Location $Root
 try {
-    & $Python -m PyInstaller --version *> $null
-    if ($LASTEXITCODE -ne 0) {
+    $PyInstallerVersionExitCode = Invoke-NativeRelaxed { & $Python -m PyInstaller --version *> $null }
+    if ($PyInstallerVersionExitCode -ne 0) {
         throw "PyInstaller is not installed. Run: $Python -m pip install pyinstaller"
     }
 
@@ -284,8 +296,8 @@ try {
     $PyInstallerArgs += @("tools\mmd_character_importer_gui.py")
 
     Write-Host "Building $Name with PyInstaller..."
-    & $Python -m PyInstaller @PyInstallerArgs
-    if ($LASTEXITCODE -ne 0) {
+    $PyInstallerBuildExitCode = Invoke-NativeRelaxed { & $Python -m PyInstaller @PyInstallerArgs }
+    if ($PyInstallerBuildExitCode -ne 0) {
         throw "PyInstaller build failed."
     }
     if ($OneDir) {
