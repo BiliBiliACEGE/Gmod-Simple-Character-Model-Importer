@@ -13,6 +13,6 @@ __pycache__/
 .ruff_cache/
 .cache/
 blender-4.5.10-windows-x64.zip
-MMDCharacterImporter.spec
-Translation Templates Write.txt
 steps.txt
+Translation Templates Write.txt
+MMDCharacterImporter.spec
