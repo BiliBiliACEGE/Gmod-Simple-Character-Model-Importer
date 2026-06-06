@@ -1,13 +1,6 @@
-# MMD Character Importer Build Repo
+# MMD Character Importer 
 
-This repository is the GitHub-uploadable source/build package for MMD Character
-Importer. It contains the source files, small vendored tools/plugins, required
-reference subsets, and scripts needed to run from source or build the Windows
-executable.
-
-Large generated outputs and the large Blender fallback zip are intentionally
-excluded from git. Download the heavyweight build asset before running or
-building.
+To developers: This repo can be directly ran from the source without downloading the .exe binary in the release. Please refer to the following instruction:
 
 ## Requirements
 
